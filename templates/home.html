@@ -1,0 +1,62 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block css %}
+<style>
+    html{
+        height: 100vh;
+    }
+    body{
+        background-image: url("{% static 'images/background_home.png' %}");
+        background-repeat: no-repeat;
+    }
+    .card-img-overlay{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: auto;
+    }
+   
+</style>
+<link rel="stylesheet" media="screen" href="{% static 'css/style.css' %}">
+{% endblock css %}
+
+{% block content %}
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+<div class="container-fluid" id="particles-js">
+    <div class="row m-4" >
+        <div class="col-md-4 mx-auto" style="z-index: 99 !important;">
+            <div class="  text-white">
+                <div class="card-body">
+                    <img class="card-img" src="{% static 'images/planet.png' %}">
+                    <div class="card-img-overlay">
+                        <p class="card-title">
+                            {% if user.is_authenticated %}
+                            Hi {{ user.username }}!
+                            <p>
+                                <a href="{% url 'logout' %}">logout</a>
+                            </p>
+                            {% else %}
+                            <p class="text-center">You are not logged in</p>
+                            <a href="{% url 'login' %}" class="mb-1 btn btn-primary btn-block">Login</a><br>
+                            <a href="{% url 'signup' %}" class="btn btn-success btn-block">Signup</a>
+                            {% endif %}
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/particles.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+{% endblock js %}
